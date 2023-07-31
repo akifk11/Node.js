@@ -1,14 +1,33 @@
 const { readFile } = require("fs");
 
-console.log("started a first task");
-// CHECK FILE PATH
-readFile("./content/first.txt", "utf-8", (err, result) => {
-  if (err) {
-    console.log(err);
-    return;
-  }
-  console.log("result:", result);
-  console.log("completed first task");
-});
+const getText = (path) => {
+  return new Promise((resolve, reject) => {
+    readFile(path, "utf-8", (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    });
+  });
+};
 
-console.log("starting next task");
+const start = async () => {
+  try {
+    const first = await getText("./content/first.txt");
+    const second = await getText("./content/second.txt");
+    console.log(first, second);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+start();
+
+// getText("./content/first.txt")
+//   .then((result) => {
+//     console.log("result:", result);
+//   })
+//   .catch((err) => {
+//     console.log("err:", err);
+//   });
