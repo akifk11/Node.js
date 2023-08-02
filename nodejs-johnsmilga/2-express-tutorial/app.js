@@ -20,6 +20,7 @@ app.get("/api/products/:productID", (req, res) => {
 
   res.json(singleProduct);
 });
+app.get("/api/products/:id/reviews/:reviewID", (req, res) => {});
 
 app.listen(5000, () => {
   console.log("Server is listening on port 5000....");
